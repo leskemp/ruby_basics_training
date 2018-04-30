@@ -3,7 +3,6 @@
 # initialising vars
 TESTING = true
 wrong = 0
-right = false
 alph_arr = ("a".."z").to_a
 guessed = ''
 
@@ -16,7 +15,12 @@ puts "#{secret} is the secret" if TESTING
 len = secret.length
 underscore_arr = Array.new(len, "_")
 
-while (wrong < 3) && !right
+puts "Welcome to Hangman"
+
+while (wrong < 3) && (underscore_arr.join('') != secret)
+  # initialise right on each turn
+  right = false
+
   puts "Hangman Secret Word"
   puts underscore_arr.join('')
   puts "Press 'Y' to see remaining letters: "
@@ -24,32 +28,25 @@ while (wrong < 3) && !right
   puts y = "Y" || y = "y" ? alph_arr
   puts "You have #{3-wrong} lives remaining"
 
-  # input a guess, if the length is 1, search for matches, else compare directly
-  # to Secret
-  puts "Enter your guess (letter or full word): "
-  guessed = STDIN.gets.chomp
-  guess_len = guessed.length
+  puts "What is your guess: "
+  guessed = STDIN.getch
 
-  if guessed_len == 1
-    #find all occurances of guess in secret
-    underscore_arr.each_with_index { |elm,idx|
-      # update the array to  if element == letter
-      alph_arr[idx] = guessed if elm == guessed
-      right = true
-    }
+  #find all occurances of guess in secret
+  underscore_arr.each_with_index { |elm,idx|
+    # update the array to  if element == letter
+    alph_arr[idx] = guessed if elm == guessed
+    right = true
+  }
 
-    # if there's no match, increment wrong
-    wrong ++ if !right
-    # if this an option? --> !right ? wrong++
-  else
-    right = true if guessed == secret
-  end
+  # if there's no match, increment wrong
+  wrong++ if !right
+  # is this an option? --> !right ? wrong++
 
-  # update underscore_arr if guess is correct.
-  #Output underscore_arr
-  # "press enter to continue"
+  right ? puts "Correct guess" : puts "Incorrect. #{3-wrong} lives left"
+  puts "any key to continue"
+  STDIN.getch
   # clear the screen
-
+  system "clear"
 end
 
 puts wrong == 3 ? "You Lose" : "You Win"
