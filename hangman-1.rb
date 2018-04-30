@@ -9,7 +9,7 @@ alph_arr = ("a".."z").to_a
 guessed = ''
 
 # default guess word is "wicked" unless an argument is included
-secret = "wicked".to_a
+secret = "bob".chars.to_a
 
 puts "#{secret.join('')} is the secret" if TESTING
 
@@ -18,7 +18,7 @@ underscore_arr = Array.new(len, "_")
 
 puts "Welcome to Hangman"
 
-while (wrong < 3) && (underscore_arr.join('') != secret)
+while (wrong < 3) && (underscore_arr.join('') != secret.join(''))
   # initialise right on each turn
   right = false
 
@@ -32,11 +32,18 @@ while (wrong < 3) && (underscore_arr.join('') != secret)
   guessed = STDIN.gets.chomp
 
   #find all occurances of guess in secret
-  secret.to_a.each_with_index { |elm,idx|
+  secret.each_with_index { |elm,idx|
     # update the array to  if element == letter
-    underscore_arr[idx] = guessed if elm == guessed
+    if elm == guessed
+      underscore_arr[idx] = elm
+      right = true
+    end
+    alph_arr.each_with_index { |a_elm,a_idx|
+      if a_elm == guessed
+        alph_arr[a_idx] = "*"
+      end
+    }
 
-    right = true
   }
 
   # if there's no match, increment wrong
@@ -51,3 +58,5 @@ while (wrong < 3) && (underscore_arr.join('') != secret)
 end
 
 wrong == 3 ? (puts "You Lose") : ("You Win")
+puts "any key to exit"
+STDIN.getch
