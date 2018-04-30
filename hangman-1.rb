@@ -1,10 +1,11 @@
 #!/usr/local/bin/ruby -w
 
+# initialising vars
 TESTING = true
-
 wrong = 0
-
+right = false
 alph_arr = ("a".."z").to_a
+guessed = ''
 
 # default guess word is "wicked" unless an argument is included
 secret = "wicked"
@@ -12,12 +13,10 @@ secret = ARGV.join(" ") unless ARGV[0].empty?
 
 puts "#{secret} is the secret" if TESTING
 
-guessed = ''
-
 len = secret.length
 underscore_arr = Array.new(len, "_")
 
-while (wrong < 3) && (guessed != secret)
+while (wrong < 3) && !right
   puts "Hangman Secret Word"
   puts underscore_arr.join('')
   puts "Press 'Y' to see remaining letters: "
@@ -43,7 +42,7 @@ while (wrong < 3) && (guessed != secret)
     wrong ++ if !right
     # if this an option? --> !right ? wrong++
   else
-
+    right = true if guessed == secret
   end
 
   # update underscore_arr if guess is correct.
