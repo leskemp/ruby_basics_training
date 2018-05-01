@@ -3,23 +3,20 @@
 require 'io/console'
 
 # initialising vars
-TESTING = true
+TESTING = false
 wrong = 0
 alph_arr = ("a".."z").to_a
 guessed = ''
-
-# default guess word is "wicked" unless an argument is included
-secret = "bob".chars.to_a
-
-puts "#{secret.join('')} is the secret" if TESTING
-
+secret = "leslie".chars.to_a
 len = secret.join('').length
 underscore_arr = Array.new(len, "_")
 
+puts "#{secret.join('')} is the secret" if TESTING
+
 puts "Welcome to Hangman"
 
-while (wrong < 3) && (underscore_arr.join('') != secret.join(''))
-  # initialise right on each turn
+while (wrong < 3) && (underscore_arr != secret)
+  # initialise right to false on each turn
   right = false
 
   puts "Hangman Secret Word: #{underscore_arr.join('')}"
