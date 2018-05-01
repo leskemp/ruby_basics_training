@@ -16,6 +16,7 @@ system "clear"
 puts "#{secret.join('')} is the secret word\n" if TESTING
 puts "Welcome to Hangman"
 
+# TODO: while game_running? (using globals)
 while (wrong < 3) && (underscore_arr != secret)
   # initialise right to false on each turn
   right = false
@@ -25,16 +26,18 @@ while (wrong < 3) && (underscore_arr != secret)
   puts "You have #{3-wrong} lives remaining"
 
   puts "What is your guess: "
+# TODO: sanitise
   guessed = STDIN.gets.chomp
 
   #find all occurances of guess in secret
-  secret.each_with_index { |elm,idx|
-    # update the array to  if element == letter
-    if elm == guessed
-      underscore_arr[idx] = elm
+  secret.each_with_index { |secret_letter,secret_index|
+    # update the array to  if secret_letter == guessed
+    if secret_letter == guessed
+      underscore_arr[secret_index] = secret_letter
       right = true
     end
     #update the available letters array with a * at guessed letter
+    # TODO: refactor explicit vars
     alph_arr.each_with_index { |a_elm,a_idx|
       if a_elm == guessed
         alph_arr[a_idx] = "*"
@@ -44,7 +47,7 @@ while (wrong < 3) && (underscore_arr != secret)
   }
 
   # if there's no match, increment wrong
-  wrong+=1 if !right
+  wrong+=1 unless right
   # is this an option? --> !right ? wrong++
 
   right == true ? (puts "Correct guess") : (puts "Incorrect. #{3-wrong} lives left")
