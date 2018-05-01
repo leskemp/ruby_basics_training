@@ -11,8 +11,9 @@ secret = "leslie".chars.to_a
 len = secret.join('').length
 underscore_arr = Array.new(len, "_")
 
-puts "#{secret.join('')} is the secret" if TESTING
+system "clear"
 
+puts "#{secret.join('')} is the secret word\n" if TESTING
 puts "Welcome to Hangman"
 
 while (wrong < 3) && (underscore_arr != secret)
@@ -33,6 +34,7 @@ while (wrong < 3) && (underscore_arr != secret)
       underscore_arr[idx] = elm
       right = true
     end
+    #update the available letters array with a * at guessed letter
     alph_arr.each_with_index { |a_elm,a_idx|
       if a_elm == guessed
         alph_arr[a_idx] = "*"
