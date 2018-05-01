@@ -23,9 +23,7 @@ while (wrong < 3) && (underscore_arr.join('') != secret.join(''))
   right = false
 
   puts "Hangman Secret Word: #{underscore_arr.join('')}"
-  puts "Press 'Y' to see remaining letters: "
-  y = STDIN.gets.chomp
-  puts alph_arr.join(" ") if y == "Y" || y == "y"
+  puts "Untried letters: \n#{alph_arr.join(" ")}"
   puts "You have #{3-wrong} lives remaining"
 
   puts "What is your guess: "
