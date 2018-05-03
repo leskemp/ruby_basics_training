@@ -1,0 +1,8 @@
+* Single responsibility object
+SOLID (save for later)
+
+"does the controller even need to know it's playing hangman?"
+
+IRB - ruby
+
+future planning: specs
