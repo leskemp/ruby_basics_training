@@ -1,16 +1,16 @@
 class View
-  def welcome
+  def show_welcome
     system "clear"
     puts "Welcome to Hangman\n"
   end
 
-  def status (word, letters, lives)
+  def show_status (word, letters, lives)
     puts "\nHidden word: #{word.join('')}"
     puts "Untried letters: #{letters.join(' ')}"
     puts "There are #{lives} lives remaining!\n"
   end
 
-  def game_over (won)
+  def show_game_over (won)
     if(won)
       puts "You are a winner!"
     else
@@ -18,7 +18,7 @@ class View
     end
   end
 
-  def correct (right)
+  def show_guess_outcome (right)
     if right
       puts "Correct guess"
     else
@@ -26,17 +26,17 @@ class View
     end
   end
 
-  def prompt
-    puts "Make a guess (a-z): "
+  def prompt_for_guess
+    print "Make a guess (a-z): "
     guess = STDIN.gets.chomp
   end
 
-  def reveal(word)
+  def show_secret(word)
     puts "The secret word was #{word}"
   end
 
-  def wait
-    print "Any key to continue\n"
+  def wait_and_clear_screen
+    puts "Any key to continue"
     STDIN.getch
     system "clear"
   end

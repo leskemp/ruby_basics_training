@@ -1,11 +1,12 @@
 class Hangman
   attr_reader :lives, :secret, :guess_stack, :alphabet
 
+  ALPHABET = ("a".."z").to_a
+
   def initialize(lives, secret)
     @lives = lives.to_i
     @secret = secret.chars
     @guess_stack = []
-    @alphabet = ("a".."z").to_a
   end
 
   def running?
@@ -34,8 +35,8 @@ class Hangman
     end
   end
 
-  def sanitised?(guess)
-    if (alphabet.include? guess.downcase) && (!guess_stack.include? guess.downcase)
+  def valid?(guess)
+    if (ALPHABET.include? guess.downcase) && (!guess_stack.include? guess.downcase)
       true
     else
       false
@@ -47,6 +48,6 @@ class Hangman
   end
 
   def show_available_letters
-    alphabet.map { |letter| (guess_stack.include?(letter) ? "*" : letter) }
+    ALPHABET.map { |letter| (guess_stack.include?(letter) ? "*" : letter) }
   end
 end
