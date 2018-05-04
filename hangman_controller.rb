@@ -3,13 +3,13 @@ require_relative 'hangman'
 require_relative 'view'
 
 class HangmanGame
-  attr_reader :hangman, :view
+  attr_reader :hangman, :view, :guess
 
   DICTIONARY = ["bob", "leslie", "purple", "at"]
 
-  def initialize(lives, secret)
-    hangman = Hangman.new(lives, secret)
-    view = View.new
+  def initialize(lives)
+    @hangman = Hangman.new(lives, DICTIONARY.sample)
+    @view = View.new
   end
 
   def play

@@ -1,5 +1,5 @@
 class Hangman
-  attr_reader :lives, :secret, :guess_stack, :alphabet
+  attr_reader :lives, :secret, :guess_stack
 
   ALPHABET = ("a".."z").to_a
 
@@ -26,7 +26,7 @@ class Hangman
   end
 
   def make_a_move(guess)
-    @guess_stack << guess.downcase
+    guess_stack << guess.downcase
     if secret.include?(guess.downcase)
       true
     else

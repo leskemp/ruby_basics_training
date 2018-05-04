@@ -28,11 +28,11 @@ class View
 
   def prompt_for_guess
     print "Make a guess (a-z): "
-    guess = STDIN.gets.chomp
+    STDIN.gets.chomp
   end
 
   def show_secret(word)
-    puts "The secret word was #{word}"
+    puts "The secret word was '#{word}'"
   end
 
   def wait_and_clear_screen
