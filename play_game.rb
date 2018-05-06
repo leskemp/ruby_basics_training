@@ -2,5 +2,4 @@
 
 require_relative 'hangman_controller'
 
-game = HangmanGame.new(3)
-game.play
+game = HangmanGame.new.play

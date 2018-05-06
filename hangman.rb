@@ -1,7 +1,7 @@
 class Hangman
-  attr_reader :lives, :secret, :guess_stack
-
   ALPHABET = ("a".."z").to_a
+
+  attr_reader :lives, :secret, :guess_stack
 
   def initialize(lives, secret)
     @lives = lives.to_i
@@ -10,6 +10,7 @@ class Hangman
   end
 
   def running?
+    # TODO: lives > 0 && (secret-guess_stack).any?
     if (lives <= 0) || ((secret - guess_stack).empty?)
       false
     else
@@ -18,6 +19,7 @@ class Hangman
   end
 
   def won?
+    # TODO: lives > 0
     if lives <= 0
       false
     else

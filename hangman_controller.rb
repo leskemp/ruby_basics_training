@@ -3,17 +3,21 @@ require_relative 'hangman'
 require_relative 'view'
 
 class HangmanGame
+  DICTIONARY = ["school", "leslie", "purple", "hedgehog", "blue",
+    "corin", "komodo"]
+
+  # TODO: do I actually need these here?
   attr_reader :hangman, :view, :guess
 
-  DICTIONARY = ["bob", "leslie", "purple", "at"]
-
-  def initialize(lives)
-    @hangman = Hangman.new(lives, DICTIONARY.sample)
+  def initialize
+    # TODO: should I save the secret here? lives?
+    # TODO: where would I add a lives selection method?
+    # TODO: do I actually need these here?
+    @hangman = Hangman.new(6, DICTIONARY.sample)
     @view = View.new
   end
 
   def play
-
     view.show_welcome
 
     while hangman.running?
@@ -28,7 +32,9 @@ class HangmanGame
     end
 
     view.show_game_over(hangman.won?)
+    # TODO: I don't like having to send the secret word back here.
     view.show_secret(hangman.secret.join(''))
     view.wait_and_clear_screen
   end
+  true
 end
